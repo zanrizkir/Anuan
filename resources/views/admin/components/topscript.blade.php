@@ -23,3 +23,5 @@
 <link rel="stylesheet" href="{{asset('assets/css/app-dark.css')}}" id="darkTheme" disabled>
 
 <link rel="stylesheet" href="{{ asset('DataTables/datatables.min.css') }}">
+
+<script src="{{asset('assets/js/jquery-3.5.1.js') }}"></script>

@@ -3,7 +3,8 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\Admin\SubKategoriController;
+use App\Http\Controllers\Admin\KategoriController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,10 +28,10 @@ Route::get('/template', function () {
 
 Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::get('/dashboard', function () {
-        return view('layouts.admin');
+        return view('admin.layouts.admin');
     });
     Route::resource('/kategori', KategoriController::class);
-    // Route::resource('/subKategori', SubKategoriController::class);
+    Route::resource('/subkategori', SubKategoriController::class);
 });
 
 Auth::routes();

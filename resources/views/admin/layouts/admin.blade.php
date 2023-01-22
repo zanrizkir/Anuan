@@ -1,16 +1,16 @@
 <!doctype html>
 <html lang="en">
   <head>
-    @include('components.topscript')
+    @include('admin.components.topscript')
   </head>
   <body class="vertical  light  ">
     <div class="wrapper">
-      @include('layouts.components.navbar')
+      @include('admin.layouts.components.navbar')
       <aside class="sidebar-left border-right bg-white shadow" id="leftSidebar" data-simplebar>
         <a href="#" class="btn collapseSidebar toggle-btn d-lg-none text-muted ml-2 mt-3" data-toggle="toggle">
           <i class="fe fe-x"><span class="sr-only"></span></i>
         </a>
-        @include('layouts.components.sidebar')
+        @include('admin.layouts.components.sidebar')
       </aside>
       <main role="main" class="main-content">
         <div class="container-fluid">
@@ -23,7 +23,7 @@
           </div> <!-- .row -->
         </div> <!-- .container-fluid -->    
     <!-- Topscript -->
-    @include('components.bottomscript')
+    @include('admin.components.bottomscript')
 
   </body>
 </html>

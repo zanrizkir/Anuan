@@ -101,4 +101,10 @@ class SubKategoriController extends Controller
         return redirect()
             ->route('subKategori.index')->with('success', 'Data has been deleted');
     }
+
+    public function getSubKategori($id)
+    {
+        $sub_kategoris = SubKategori::where('kategori_id', $id)->get();
+        return response()->json($sub_kategoris);
+    }
 }

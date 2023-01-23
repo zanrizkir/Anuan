@@ -14,7 +14,7 @@
               <div class="form-group">
                 <div class="mb-3">
                     <label for="recipient-name" >Name Kategori</label>
-                    <select name="kategori_id" class="custom-select mb-3 @error('kategori_id') is-invalid @enderror">
+                    <select name="kategori_id" class="form-control mb-3 @error('kategori_id') is-invalid @enderror">
                         @foreach ($kategoris as $kategori)
                             <option value="" hidden>Pilih Kategori</option>
                             <option value="{{ $kategori->id }}">{{ $kategori->name }}

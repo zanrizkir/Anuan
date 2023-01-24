@@ -72,7 +72,9 @@ class SubKategoriController extends Controller
      */
     public function edit($id)
     {
-        
+        $sub = subKategori::findOrFail($id);
+        $kategori = Kategori::all();
+        return view('admin.subKategori.edit', compact('kategori', 'sub'));
     }
 
     /**
@@ -82,10 +84,18 @@ class SubKategoriController extends Controller
      * @param  \App\Models\SubKategori  $subKategori
      * @return \Illuminate\Http\Response
      */
-    public function update($id){
-        $kategoris = Kategori::all();
-        $subKategoris = subKategori::findOrFail($id);
-        return view('admin.subkategori.edit', compact('kategoris', 'sub'));
+    public function update(Request $request,$id){
+        $validated = $request->validate([
+            'kategori_id' => 'required',
+            'name' => 'required',
+        ]);
+
+        $sub = subKategori::findOrFail($id);
+        $sub->kategori_id = $request->kategori_id;
+        $sub->name = $request->name;
+        $sub->save();
+        return redirect()
+            ->route('subkategori.index')->with('success', 'Data has been edited');
     }
 
     /**
@@ -99,7 +109,7 @@ class SubKategoriController extends Controller
         $sub = subKategori::findOrFail($id);
         $sub->delete();
         return redirect()
-            ->route('subKategori.index')->with('success', 'Data has been deleted');
+            ->route('subkategori.index')->with('success', 'Data has been deleted');
     }
 
     public function getSubKategori($id)

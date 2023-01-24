@@ -6,33 +6,35 @@
     <div class="card shadow mb-4">
 
         <div class="card-body">
-            <form action="{{ route('kategori.update', $kategori->id) }}" method="post">
+            <form action="{{ route('subkategori.update', $sub->id) }}" method="post">
                 @csrf
                 @method('put')
       
                 <div class="form-group">
                     <div class="mb-3">
-                        <label class="form-label">Name Kategori</label>
-                        <select name="kategori_id" class="form-select @error('kategori_id') is-invalid @enderror">
-                            @foreach ($sub as $kategori)
-                                @if (old('kategori_id', $kategori->id) == $sub->kategori->id)
-                                    <option value="{{ $kategori->id }}" selected hidden>{{ $kategori->name }}</option>
-                                @else
-                                    <option value="{{ $kategori->id }}">{{ $kategori->name }}</option>
-                                @endif
-                            @endforeach
-                        </select>
-                        @error('kategori_id')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+                        <div class="form-group mb-3">
+                            <label class="form-label">Name Kategori</label>
+                            <select name="kategori_id" class="form-control @error('kategori_id') is-invalid @enderror">
+                                @foreach ($kategori as $kategoris)
+                                    @if (old('kategori_id', $kategoris->id) == $sub->kategori->id)
+                                        <option value="{{ $kategoris->id }}" selected hidden>{{ $kategoris->name }}</option>
+                                    @else
+                                        <option value="{{ $kategoris->id }}">{{ $kategoris->name }}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+                            @error('kategori_id')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Nama sub kategori</label>
                         <input type="text" name="name"
                             class="form-control mb-2  @error('name') is-invalid @enderror" placeholder="Nama Kategori"
-                            value="{{ $subKategoris->name }}">
+                            value="{{ $sub->name }}">
                         @error('name')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

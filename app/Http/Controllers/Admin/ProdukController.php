@@ -99,8 +99,8 @@ class ProdukController extends Controller
      */
     public function edit($id)
     {
-        $kategoris = Kategori::all();
         $produk = Produk::findOrFail($id);
+        $kategoris = Kategori::all();
         $subKategoris = SubKategori::where('kategori_id', $produk->kategori_id)->get();
         $images = Image::where('produk_id', $id)->get();
         return view('admin.produk.edit', compact('kategoris', 'produk', 'subKategoris', 'images'));

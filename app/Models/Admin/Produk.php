@@ -5,6 +5,7 @@ namespace App\Models\Admin;
 use App\Models\Admin\Image;
 use App\Models\Admin\Kategori;
 use App\Models\Admin\SubKategori;
+use App\Models\Admin\RiwayatProduk;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -25,6 +26,11 @@ class Produk extends Model
     public function image()
     {
         return $this->hasMany(Image::class);
+    }
+
+    public function riwayatProduk()
+    {
+        return $this->hasMany(RiwayatProduk::class);
     }
 
 }

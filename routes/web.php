@@ -4,6 +4,7 @@ use App\Models\Admin\Produk;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ImageController;
 use App\Http\Controllers\Admin\ProdukController;
 use App\Http\Controllers\Admin\KategoriController;
@@ -39,6 +40,7 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::resource('/produk', ProdukController::class);
     Route::resource('/image', ImageController::class);
     Route::resource('/riwayatProduk', RiwayatProdukController::class);
+    Route::resource('/user', UserController::class);
     // Route::resource('/riwayatProduk', RiwayatProdukController::class);
     Route::get('getSub_kategori/{id}', [SubKategoriController::class, 'getSubKategori']);
 });

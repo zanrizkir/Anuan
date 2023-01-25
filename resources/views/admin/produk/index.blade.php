@@ -11,11 +11,11 @@
         <div class="col-md-12">
           <div class="card shadow-lg">
             <div class="card-body">
-              <div class="text-right">
+              <div class="">
                 <a href="{{ Route('produk.create') }}" class="btn mb-3 btn-primary" data-bs-toggle="tooltip"
                 data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true"
                 title="Tambah Data">Tambah Data</a>
-                <button type="button" class="btn mb-3 btn-primary" data-toggle="modal" data-target="#varyModal" data-whatever="@mdo">Tambah Stok</button>
+                <button type="button" class="btn mb-3 btn-primary" data-toggle="modal" data-target="#varyModal" data-whatever="@mdo">Set Stok</button>
                 @include('admin.produk.stok')
               </div>
               <table class="table datatables table-bordered table-hover" id="dataTable">

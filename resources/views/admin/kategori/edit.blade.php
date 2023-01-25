@@ -25,7 +25,7 @@
                     <a href="/admin/kategori" class="btn btn-primary"><i class="fe fe-corner-up-left"></i></a>
                     <button type="submit" class="btn btn-primary">Edit</button>
                 </div>
-                </form>
+            </form>
         </div>
     </div>
 </div>

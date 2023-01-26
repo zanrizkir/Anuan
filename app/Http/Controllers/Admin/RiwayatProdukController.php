@@ -17,7 +17,7 @@ class RiwayatProdukController extends Controller
     public function index()
     {
         $riwayat = RiwayatProduk::with('produk')->latest()->get();
-        return view('admin.riwayatproduk.index', compact('riwayat'));
+        return view('admin.riwayatproduk.index',['active' => 'riwayat'], compact('riwayat'));
     }
 
     /**
@@ -28,7 +28,7 @@ class RiwayatProdukController extends Controller
     public function create()
     {
         $produks = Produk::all();
-        return view('admin.produk.index', compact('produk'));
+        return view('admin.produk.index',['active' => 'produk'], compact('produk'));
     }
 
     /**
@@ -67,7 +67,7 @@ class RiwayatProdukController extends Controller
 
         $produks->save();
         return redirect()
-            ->route('produk.index')->with('success', 'Data has been added');
+            ->route('produk.index')->with('toast_success', 'Data Berhasil Ditambahkan');
     }
 
     /**
@@ -115,6 +115,6 @@ class RiwayatProdukController extends Controller
         $riwayat = RiwayatProduk::findOrFail($id);
         $riwayat->delete();
         return redirect()
-            ->route('riwayatProduk.index')->with('success', 'Data has been deleted');
+            ->route('riwayatProduk.index')->with('toast_success', 'Data Berhasil Dihapus');
     }
 }

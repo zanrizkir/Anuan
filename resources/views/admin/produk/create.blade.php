@@ -113,6 +113,7 @@
         </div>
         <div class="d-flex float-end">
           <div class="col">
+            <a href="/admin/produk" class="btn btn-primary">Kembali</a>
               <button type="reset" class="btn btn-secondary mx-3">
                 reset
               </button>

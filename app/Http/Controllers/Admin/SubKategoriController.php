@@ -18,7 +18,7 @@ class SubKategoriController extends Controller
     {
         $kategoris = Kategori::all();
         $sub = SubKategori::with('kategori')->latest()->get();
-        return view('admin.subKategori.index', compact('kategoris','sub'));
+        return view('admin.subKategori.index',['active' => 'sub'], compact('kategoris','sub'));
     }
 
     /**
@@ -29,7 +29,7 @@ class SubKategoriController extends Controller
     public function create()
     {
         $kategoris = Kategori::all();
-        return view('admin.subKategori.create', compact('kategoris'));
+        return view('admin.subKategori.create',['active' => 'sub'], compact('kategoris'));
     }
 
     /**
@@ -50,7 +50,7 @@ class SubKategoriController extends Controller
         $sub->name = $request->name;
         $sub->save();
         return redirect()
-            ->route('subkategori.index')->with('success', 'Data has been added');
+            ->route('subkategori.index')->with('toast_success', 'Data Berhasil Ditambahkan');
     }
 
     /**
@@ -74,7 +74,7 @@ class SubKategoriController extends Controller
     {
         $sub = subKategori::findOrFail($id);
         $kategori = Kategori::all();
-        return view('admin.subKategori.edit', compact('kategori', 'sub'));
+        return view('admin.subKategori.edit',['active' => 'sub'], compact('kategori', 'sub'));
     }
 
     /**
@@ -95,7 +95,7 @@ class SubKategoriController extends Controller
         $sub->name = $request->name;
         $sub->save();
         return redirect()
-            ->route('subkategori.index')->with('success', 'Data has been edited');
+            ->route('subkategori.index')->with('toast_success', 'Data Berhasil Diubah');
     }
 
     /**
@@ -109,7 +109,7 @@ class SubKategoriController extends Controller
         $sub = subKategori::findOrFail($id);
         $sub->delete();
         return redirect()
-            ->route('subkategori.index')->with('success', 'Data has been deleted');
+            ->route('subkategori.index')->with('toast_success', 'Data Berhasil Dihapus');
     }
 
     public function getSubKategori($id)

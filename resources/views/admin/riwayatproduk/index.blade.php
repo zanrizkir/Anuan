@@ -8,6 +8,7 @@
             <h2 class="mb-2 page-title">
                 Data Riwayat Produk
             </h2>
+            @include('sweetalert::alert')
             <div class="row my-4">
                 <div class="col-md 12">
                     <div class="card shadow-lg">

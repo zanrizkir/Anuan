@@ -4,6 +4,7 @@
 
     <div class="row">
         <div class="col-md-6">
+            @include('sweetalert::alert')
             <div class="card shadow-lg mb-4">
             <div class="card-header">
                 <strong class="card-title">Data Produk</strong>
@@ -125,9 +126,8 @@
                 </div>
                 <div class="d-flex float-end">
                     <div class="col">
-                        <button type="reset" class="btn btn-secondary mx-3">
-                            Reset
-                        </button>
+                        <a href="/admin/produk" class="btn btn-primary">Kembali</a>
+                        
                         <button type="submit" class="btn btn-primary">
                              Kirim
                         </button>
@@ -148,16 +148,16 @@
                         <input type="hidden" name="produk_id" value="{{ $produk->id }}">
                         <div class="mb-3">
                             <label class="form-label">gambar produk</label>
-                            <div class="custom-file">
+                            
+                            <label class="custom-file-label" for="customFile">Choose file</label>
                               <input type="file" class="form-control-file @error('gambar_produk') is-invalid @enderror"
                                   name="gambar_produk[]" value="{{ old('gambar_produk') }}" multiple>
-                              <label class="custom-file-label" for="customFile">Choose file</label>
                               @error('gambar_produk')
                                   <span class="invalid-feedback" role="alert">
                                       <strong>{{ $message }}</strong>
                                   </span>
                               @enderror
-                            </div>
+                            
                         </div>
                         <button type="submit" class="mb-3 btn btn-primary">
                             Kirim
@@ -184,6 +184,7 @@
                                                                 </button>
                                                             </div>
                                                             <div class="modal-footer">
+                                                                
                                                                 <button type="button" class="btn mb-2 btn-secondary" data-dismiss="modal">Close</button>
                                                                 <button type="submit" class="btn mb-2 btn-primary">Hapus</button>
                                                             </div>

@@ -8,6 +8,11 @@ use App\Http\Controllers\Controller;
 
 class KategoriController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +21,8 @@ class KategoriController extends Controller
     public function index()
     {
         $kategori = Kategori::all();
-        return view('admin.kategori.index', compact('kategori'));
+        $active = 'kategori';
+        return view('admin.kategori.index', compact('kategori','active'));
     }
 
     /**
@@ -26,7 +32,7 @@ class KategoriController extends Controller
      */
     public function create()
     {
-        return view('admin.kategori.create');
+        return view('admin.kategori.create',['active' => 'kategori']);
     }
 
     /**
@@ -41,11 +47,15 @@ class KategoriController extends Controller
             'name' => 'required|unique:kategoris',
         ]);
 
+        // if ($request->validate->fails()) {
+        //     return back()->with('errors', $request->validate->messages()->all()[0])->withInput();
+        // }
+
         $kategori = new Kategori();
         $kategori->name = $request->name;
         $kategori->save();
-        return redirect()
-            ->route('kategori.index')->with('success', 'Data has been added');
+        return redirect()->route('kategori.index')->with('toast_success', 'Data Berhasil Ditambahkan');
+        
 
     }
 
@@ -69,7 +79,7 @@ class KategoriController extends Controller
     public function edit($id)
     {
         $kategori = Kategori::findOrFail($id);
-        return view('admin.kategori.edit', compact('kategori'));
+        return view('admin.kategori.edit',['active' => 'kategori'], compact('kategori'));
     }
 
     /**
@@ -92,7 +102,7 @@ class KategoriController extends Controller
         $kategori->name = $request->name;
         $kategori->save();
         return redirect()
-            ->route('kategori.index')->with('success', 'Data has been edited');
+            ->route('kategori.index')->with('toast_success', 'Data Berhasil Diubah');
     }
 
     /**
@@ -106,6 +116,7 @@ class KategoriController extends Controller
         $kategori = Kategori::findOrFail($id);
         $kategori->delete();
         return redirect()
-            ->route('kategori.index')->with('success', 'Data has been deleted');
+            ->route('kategori.index')->with('toast_success', 'Data Berhasil Dihapus');
+
     }
 }

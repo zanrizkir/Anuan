@@ -20,8 +20,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->integer('saldo')->default('0');
-            $table->enum('status', ['aktif', 'tidak aktif'])->default('tidak aktif');
-            $table->string('profile')->default('images/users/profile.jpeg');
+            $table->string('profile')->default('images/user/user.png');
             $table->enum('role', ['admin','costumer'])->default('costumer');
             $table->rememberToken();
             $table->timestamps();

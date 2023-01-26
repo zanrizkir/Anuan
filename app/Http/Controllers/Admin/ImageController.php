@@ -49,7 +49,7 @@ class ImageController extends Controller
                 $images->gambar_produk = 'images/gambar_produk/' . $name;
                 $images->save();
             }
-            return back()->with('success', 'Data has been added');
+            return back()->with('toast_success', 'Data Berhasil Ditambahkan');
         }
 
     }
@@ -100,7 +100,7 @@ class ImageController extends Controller
         $images->deleteImage();
         $images->delete();
 
-        return back()->with('success', 'Data has been deleted');
+        return back()->with('toast_success', 'Data Berhasil Dihapus');
 
     }
 }

@@ -6,6 +6,7 @@
   <div class="row justify-content-center">
     <div class="col-12">
       <h2 class="mb-2 page-title">Data kategori</h2>
+      @include('sweetalert::alert')
       <div class="row my-4">
         <!-- Small table -->
         <div class="col-md-12">
@@ -46,8 +47,8 @@
                                         title="Edit Data">
                                         edit
                                     </a> |
-                                    <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#defaultModal"> Hapus </button>
-                                    <div class="modal fade" id="defaultModal" tabindex="-1" role="dialog" aria-labelledby="defaultModalLabel {{ $kategoris->id }}" aria-hidden="true">
+                                    <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#defaultModal{{ $kategoris->id }}"> Hapus </button>
+                                    <div class="modal fade" id="defaultModal{{ $kategoris->id }}" tabindex="-1" role="dialog" aria-labelledby="defaultModalLabel " aria-hidden="true">
                                       <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                           <div class="modal-header">

@@ -19,7 +19,7 @@ class ProdukController extends Controller
     public function index()
     {
         $produk = Produk::with('kategori', 'subKategori')->latest()->get();
-        return view('admin.produk.index', compact('produk'));
+        return view('admin.produk.index',['active' => 'produk'], compact('produk'));
     }
 
     /**
@@ -31,7 +31,7 @@ class ProdukController extends Controller
     {
         $kategoris = Kategori::all();
         // $sub = SubKategori::all();
-        return view('admin.produk.create', compact('kategoris'));
+        return view('admin.produk.create',['active' => 'produk'], compact('kategoris'));
     }
 
     /**
@@ -75,7 +75,7 @@ class ProdukController extends Controller
         }
 
         return redirect()
-            ->route('produk.index')->with('success', 'Data has been added');
+            ->route('produk.index')->with('toast_success', 'Data Berhasil Ditambahkan');
 
     }
 
@@ -88,7 +88,7 @@ class ProdukController extends Controller
     public function show($id)
     {
         $produk = Produk::findOrFail($id);
-        return view('admin.produk.show', compact('produk'));
+        return view('admin.produk.show',['active' => 'produk'], compact('produk'));
     }
 
     /**
@@ -103,7 +103,7 @@ class ProdukController extends Controller
         $kategoris = Kategori::all();
         $subKategoris = SubKategori::where('kategori_id', $produk->kategori_id)->get();
         $images = Image::where('produk_id', $id)->get();
-        return view('admin.produk.edit', compact('kategoris', 'produk', 'subKategoris', 'images'));
+        return view('admin.produk.edit',['active' => 'produk'], compact('kategoris', 'produk', 'subKategoris', 'images'));
 
     }
 
@@ -137,7 +137,7 @@ class ProdukController extends Controller
         $produk->deskripsi = $request->deskripsi;
         $produk->save();
         return redirect()
-            ->route('produk.index')->with('success', 'Data has been edited');
+            ->route('produk.index')->with('toast_success', 'Data Berhasil Diubah');
     }
 
     /**
@@ -156,6 +156,6 @@ class ProdukController extends Controller
         }
         $produks->delete();
         return redirect()
-            ->route('produk.index')->with('success', 'Data has been deleted');
+            ->route('produk.index')->with('toast_success', 'Data Berhasil Dihapus');
     }
 }

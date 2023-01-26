@@ -113,6 +113,11 @@ class KategoriController extends Controller
      */
     public function destroy($id)
     {
+
+        if (!Kategori::destroy($id)){
+            return redirect()->back();
+        }
+
         $kategori = Kategori::findOrFail($id);
         $kategori->delete();
         return redirect()

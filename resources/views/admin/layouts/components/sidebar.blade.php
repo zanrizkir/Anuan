@@ -16,16 +16,16 @@
       <span>Data</span>
     </p>
     <ul class="navbar-nav flex-fill w-100 mb-2">
-      <li class="nav-item w-100">
-        <a class="nav-link" href="#">
+      <li class="nav-item w-100 ">
+        <a class="nav-link " href="#">
           <i class="fe fe-home fe-16"></i>
           <span class="ml-3 item-text">Dashboard</span>
         </a>
       </li>
     </ul>
     <ul class="navbar-nav flex-fill w-100 mb-2">
-      <li class="nav-item w-100">
-        <a class="nav-link {{ $active == 'user' ? 'active' : null }}" href="/admin/user">
+      <li class="nav-item w-100 {{ $active == 'user' ? 'active' : null }}">
+        <a class="nav-link " href="/admin/user">
           <i class="fe fe-users"></i>
           <span class="ml-3 item-text">User</span>
         </a>
@@ -42,8 +42,8 @@
           <span class="ml-3 item-text">Category </span>
         </a>
         <ul class="collapse list-unstyled pl-4 w-100" id="ui-elements">
-          <li class="nav-item">
-            <a class="nav-link pl-3" href="/admin/kategori">
+          <li class="nav-item {{ $active == 'kategori' ? 'active' : null }}">
+            <a class="nav-link pl-3 " href="/admin/kategori">
 
               <span class="ml-1 item-text">Kategori</span>
             </a>
@@ -51,8 +51,8 @@
           
         </ul>
         <ul class="collapse list-unstyled pl-4 w-100" id="ui-elements">
-          <li class="nav-item">
-            <a class="nav-link pl-3" href="/admin/subkategori">
+          <li class="nav-item {{ $active == 'sub' ? 'active' : null }}">
+            <a class="nav-link pl-3 " href="/admin/subkategori">
 
               <span class="ml-1 item-text">Sub Kategori</span>
             </a>
@@ -62,17 +62,17 @@
       </li>
     </ul>
     <ul class="navbar-nav flex-fill w-100 mb-2">
-      <li class="nav-item w-100">
-        <a class="nav-link" href="/admin/produk">
+      <li class="nav-item {{ $active == 'produk' ? 'active' : null }} w-100">
+        <a class="nav-link " href="/admin/produk">
           <i class="fe fe-clipboard"></i>
           <span class="ml-3 item-text">Produk</span>
         </a>
       </li>
     </ul>
     <ul class="navbar-nav flex-fill w-100 mb-2">
-      <li class="nav-item w-100">
-        <a class="nav-link" href="/admin/riwayatProduk">
-          <i class="fe fe-rotate-ccw"></i>
+      <li class="nav-item w-100 {{ $active == 'riwayat' ? 'active' : null }}">
+        <a class="nav-link " href="/admin/riwayatProduk">
+          <i class="fe fe-rotate-ccw "></i>
           <span class="ml-3 item-text">Riwayat Produk</span>
         </a>
       </li>

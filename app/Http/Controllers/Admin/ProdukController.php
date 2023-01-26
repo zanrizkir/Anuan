@@ -88,7 +88,10 @@ class ProdukController extends Controller
     public function show($id)
     {
         $produk = Produk::findOrFail($id);
-        return view('admin.produk.show',['active' => 'produk'], compact('produk'));
+        $kategoris = Kategori::all();
+        $subKategoris = SubKategori::where('kategori_id', $produk->kategori_id)->get();
+        $images = Image::where('produk_id', $id)->get();
+        return view('admin.produk.show',['active' => 'produk'], compact('kategoris', 'produk', 'subKategoris', 'images'));
     }
 
     /**

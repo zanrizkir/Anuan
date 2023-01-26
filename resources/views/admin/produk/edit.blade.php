@@ -149,7 +149,6 @@
                         <div class="mb-3">
                             <label class="form-label">gambar produk</label>
                             
-                            <label class="custom-file-label" for="customFile">Choose file</label>
                               <input type="file" class="form-control-file @error('gambar_produk') is-invalid @enderror"
                                   name="gambar_produk[]" value="{{ old('gambar_produk') }}" multiple>
                               @error('gambar_produk')

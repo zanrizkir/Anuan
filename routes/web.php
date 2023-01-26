@@ -31,9 +31,15 @@ Route::get('/template', function () {
     return view('layouts.admin');
 });
 
-Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {  
     Route::get('/dashboard', function () {
-        return view('admin.layouts.admin');
+        return view('admin.layouts.admin', [
+            'active' => 'kategori'
+        ]);
     });
     Route::resource('/kategori', KategoriController::class);
     Route::resource('/subkategori', SubKategoriController::class);
@@ -45,6 +51,4 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::get('getSub_kategori/{id}', [SubKategoriController::class, 'getSubKategori']);
 });
 
-Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

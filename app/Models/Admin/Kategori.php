@@ -22,13 +22,13 @@ class Kategori extends Model
     }
     use HasFactory;
 
-    // public static function boot(){
-    //     parent::boot();
-    //     self::deleting(function($var){
-    //         if ($var->SubKategori->count() > 0){
-    //             Alert::error('Error', 'Data Tidak Bisa Dihapus');
-    //         return false;
-    //         }
-    //     });
-    // }
+    public static function boot(){
+        parent::boot();
+        self::deleting(function($var){
+            if ($var->sub_kategori->count() > 0){
+                Alert::error('Error', 'Data Tidak Bisa Dihapus');
+            return false;
+            }
+        });
+    }
 }

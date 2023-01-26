@@ -17,7 +17,6 @@
                                 <thead class="thead-dark">
                                     <tr>
                                         <th>No</th>
-                                        <th>Users</th>
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>Saldo</th>
@@ -33,12 +32,7 @@
                                                         {{ $loop->iteration }}
                                                     </div>
                                                 </td>
-                                                <td>
-                                                    <div class="d-flex">
-                                                        <img src="{{ asset($user->profile) }}" alt="profile"
-                                                            class="rounded-circle w-100" />
-                                                    </div>
-                                                </td>
+                                                
                                                 <td>
                                                     <div class="d-flex">
                                                         {{ $user->name }}

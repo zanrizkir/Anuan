@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ImageController;
 use App\Http\Controllers\Admin\ProdukController;
 use App\Http\Controllers\Admin\KategoriController;
+use App\Http\Controllers\Admin\MetodePembayaranController;
 use App\Http\Controllers\Admin\SubKategoriController;
 use App\Http\Controllers\Admin\RiwayatProdukController;
 
@@ -47,6 +48,7 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::resource('/image', ImageController::class);
     Route::resource('/riwayatProduk', RiwayatProdukController::class);
     Route::resource('/user', UserController::class);
+    Route::resource('/metode', MetodePembayaranController::class);
     // Route::resource('/riwayatProduk', RiwayatProdukController::class);
     Route::get('getSub_kategori/{id}', [SubKategoriController::class, 'getSubKategori']);
 });

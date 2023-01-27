@@ -2,11 +2,18 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Admin\MetodePembayaran;
 use Illuminate\Http\Request;
+
+use App\Http\Controllers\Controller;
+use App\Models\Admin\MetodePembayaran;
 
 class MetodePembayaranController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,8 +21,12 @@ class MetodePembayaranController extends Controller
      */
     public function index()
     {
-        //
+        $metode = MetodePembayaran::all();
+        // $kategori = Kategori::all();
+        $active = 'metode';
+        return view('admin.metodepembayaran.index', compact('metode','active'));
     }
+    
 
     /**
      * Show the form for creating a new resource.
@@ -24,7 +35,7 @@ class MetodePembayaranController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.metodepembayaran.create',['active' => 'metode']);
     }
 
     /**
@@ -35,7 +46,15 @@ class MetodePembayaranController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'metode' => 'required|unique:metode_pembayarans',
+        ]);
+
+        $metode = new MetodePembayaran();
+        $metode->metode = $request->metode;
+        $metode->save();
+        return redirect()->route('metode.index')->with('toast_success', 'Data Berhasil Ditambahkan');
+
     }
 
     /**
@@ -55,9 +74,11 @@ class MetodePembayaranController extends Controller
      * @param  \App\Models\Admin\MetodePembayaran  $metodePembayaran
      * @return \Illuminate\Http\Response
      */
-    public function edit(MetodePembayaran $metodePembayaran)
+    public function edit($id)
     {
-        //
+        $metode = MetodePembayaran::findOrFail($id);
+        return view('admin.metodepembayaran.edit',['active' => 'metode'], compact('metode'));
+
     }
 
     /**
@@ -67,9 +88,20 @@ class MetodePembayaranController extends Controller
      * @param  \App\Models\Admin\MetodePembayaran  $metodePembayaran
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, MetodePembayaran $metodePembayaran)
+    public function update(Request $request, $id)
     {
-        //
+        $metode = MetodePembayaran::findOrFail($id);
+
+        if ($request->metode != $metode->metode){
+            $rules['metode'] = 'required';
+        }
+
+        $validasiData = $request->validate($rules);
+
+        $metode->metode = $request->metode;
+        $metode->save();
+        return redirect()
+            ->route('metode.index')->with('toast_success', 'Data Berhasil Diubah');
     }
 
     /**
@@ -78,8 +110,12 @@ class MetodePembayaranController extends Controller
      * @param  \App\Models\Admin\MetodePembayaran  $metodePembayaran
      * @return \Illuminate\Http\Response
      */
-    public function destroy(MetodePembayaran $metodePembayaran)
+    public function destroy($id)
     {
-        //
+        $metode = MetodePembayaran::findOrFail($id);
+        $metode->delete();
+        return redirect()
+            ->route('metode.index')->with('toast_success', 'Data Berhasil Dihapus');
+
     }
 }

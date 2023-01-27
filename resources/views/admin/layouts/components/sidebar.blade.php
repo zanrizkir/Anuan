@@ -77,6 +77,14 @@
         </a>
       </li>
     </ul>
+    <ul class="navbar-nav flex-fill w-100 mb-2">
+      <li class="nav-item w-100 {{ $active == 'metode' ? 'active' : null }}">
+        <a class="nav-link " href="/admin/metode">
+          <i class="fe fe-credit-card "></i>
+          <span class="ml-3 item-text">Metode Pembayaran</span>
+        </a>
+      </li>
+    </ul>
 
     <p class="text-muted nav-heading mt-4 mb-1">
       <span>Data User</span>

@@ -2,8 +2,9 @@
 
 namespace App\Models\Admin;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Admin\TopUp;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class MetodePembayaran extends Model
 {
@@ -12,4 +13,7 @@ class MetodePembayaran extends Model
     public function topup(){
         return $this->hasMany(TopUp::class);
     }
+    // public function topups(){
+    //     return $this->belongsTo(TopUp::class);
+    // }
 }

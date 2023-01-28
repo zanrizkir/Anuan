@@ -80,7 +80,7 @@
     <ul class="navbar-nav flex-fill w-100 mb-2">
       <li class="nav-item w-100 {{ $active == 'metode' ? 'active' : null }}">
         <a class="nav-link " href="/admin/metode">
-          <i class="fe fe-credit-card "></i>
+          <i class="fe fe-database "></i>
           <span class="ml-3 item-text">Metode Pembayaran</span>
         </a>
       </li>
@@ -90,4 +90,12 @@
       <span>Data User</span>
     </p>
       
+    <ul class="navbar-nav flex-fill w-100 mb-2">
+      <li class="nav-item w-100 {{ $active == 'topup' ? 'active' : null }}">
+        <a class="nav-link " href="/admin/topup">
+          <i class="fe fe-credit-card "></i>
+          <span class="ml-3 item-text">Topup</span>
+        </a>
+      </li>
+    </ul>
   </nav>

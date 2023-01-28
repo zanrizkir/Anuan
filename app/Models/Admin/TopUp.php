@@ -3,8 +3,9 @@
 namespace App\Models\Admin;
 
 use App\Models\User;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Admin\MetodePembayaran;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class TopUp extends Model
 {
@@ -14,6 +15,6 @@ class TopUp extends Model
         return $this->belongsTo(User::class);
     }
     public function metode(){
-        return $this->hasMany(MetodePembayaran::class);
+        return $this->belongsTo(MetodePembayaran::class,'metode_pembayaran_id');
     }
 }

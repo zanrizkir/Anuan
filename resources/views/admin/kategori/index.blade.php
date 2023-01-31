@@ -64,23 +64,6 @@
                                         </div>
                                       </div>
                                     </div>
-                                    <div class="modal fade" id="defaultModal" tabindex="-1" role="dialog" aria-labelledby="defaultModalLabel {{ $kategoris->id }}" aria-hidden="true">
-                                      <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                          <div class="modal-header">
-                                            <h5 class="modal-title " id="defaultModalLabel">Apakah Anda Yakin</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                              <span aria-hidden="true">&times;</span>
-                                            </button>
-                                          </div>
-                                          <div class="modal-footer">
-                                            <button type="button" class="btn mb-2 btn-secondary" data-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn mb-2 btn-primary">Hapus</button>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-              
                                 </form>
                             </td>
                         </tr>

@@ -4,6 +4,7 @@ namespace App\Models\Admin;
 
 use App\Models\Admin\Image;
 use App\Models\Admin\Kategori;
+use App\Models\Admin\Keranjang;
 use App\Models\Admin\SubKategori;
 use App\Models\Admin\RiwayatProduk;
 use Illuminate\Database\Eloquent\Model;
@@ -31,6 +32,11 @@ class Produk extends Model
     public function riwayatProduk()
     {
         return $this->hasMany(RiwayatProduk::class);
+    }
+
+    public function keranjang()
+    {
+        return $this->hasMany(Keranjang::class);
     }
 
 }

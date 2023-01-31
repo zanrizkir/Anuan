@@ -98,4 +98,13 @@
         </a>
       </li>
     </ul>
+    
+    <ul class="navbar-nav flex-fill w-100 mb-2">
+      <li class="nav-item w-100 {{ $active == 'keranjang' ? 'active' : null }}">
+        <a class="nav-link " href="/admin/keranjang">
+          <i class="fe fe-shopping-cart "></i>
+          <span class="ml-3 item-text">Keranjang</span>
+        </a>
+      </li>
+    </ul>
   </nav>

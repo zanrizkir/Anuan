@@ -2,24 +2,29 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Admin\Image;
+use App\Models\Admin\Kota;
 use Illuminate\Http\Request;
+use App\Models\Admin\Provinsi;
 use App\Http\Controllers\Controller;
 
-class ImageController extends Controller
+class KotaController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
     public function index()
     {
-        //
+        $provinsi = Provinsi::all();
+        $kota = Kota::with('provinsi')->latest()->get();
+        return view('admin.kota.index',['active' => 'kota'], compact('provinsi','kota'));
+
+        
     }
 
     /**
@@ -40,31 +45,16 @@ class ImageController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'gambar_produk' => 'required',
-        ]);
-
-        if ($request->hasfile('gambar_produk')) {
-            foreach ($request->file('gambar_produk') as $image) {
-                $name = rand(1000, 9999) . $image->getClientOriginalName();
-                $image->move('images/gambar_produk/', $name);
-                $images = new Image();
-                $images->produk_id = $request->produk_id;
-                $images->gambar_produk = 'images/gambar_produk/' . $name;
-                $images->save();
-            }
-            return back()->with('toast_success', 'Data Berhasil Ditambahkan');
-        }
-
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Admin\Kota  $kota
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Kota $kota)
     {
         //
     }
@@ -72,10 +62,10 @@ class ImageController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Admin\Kota  $kota
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Kota $kota)
     {
         //
     }
@@ -84,10 +74,10 @@ class ImageController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Admin\Kota  $kota
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Kota $kota)
     {
         //
     }
@@ -95,16 +85,11 @@ class ImageController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Admin\Kota  $kota
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Kota $kota)
     {
-        $images = Image::findOrFail($id);
-        $images->deleteImage();
-        $images->delete();
-
-        return back()->with('toast_success', 'Data Berhasil Dihapus');
-
+        //
     }
 }

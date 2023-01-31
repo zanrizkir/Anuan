@@ -5,30 +5,27 @@
 <div class="container-fluid">
   <div class="row justify-content-center">
     <div class="col-12">
-      <h2 class="mb-2 page-title">Data Top Up</h2>
+      <h2 class="mb-2 page-title">Data Provinsi</h2>
       @include('sweetalert::alert')
       <div class="row my-4">
         <!-- Small table -->
         <div class="col-md-12">
           <div class="card shadow-lg">
             <div class="card-body">
-              <div class="">
-                <button type="button" class="btn mb-3 btn-primary" data-toggle="modal" data-target="#varyModal" data-whatever="@mdo">Top Up</button>
-                @include('admin.topup.create')
+              <div class="text-right">
+                <button type="button" class="btn mb-2 btn-outline-primary" data-toggle="modal" data-target="#varyModal" data-whatever="@mdo">Tambah Data</button>
               </div>
               <table class="table datatables table-bordered table-hover" id="dataTable">
                 <thead class="thead-dark">
                   <tr>
                     <th>No</th>
-                    <th>Nama User</th>
-                    <th>Jumlah Saldo</th>
-                    <th>Metode Pembayaran</th>
-                    {{-- <th>Action</th> --}}
+                    <th>Nama Provinsi</th>
+                    <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                  @if (count($topup))
-                    @foreach ($topup as $top)
+                  @if (count($provinsi))
+                    @foreach ($provinsi as $provinsis)
                         <tr>
                             <td>
                                 <div class="d-flex">
@@ -37,25 +34,21 @@
                             </td>
                             <td>
                                 <div class="d-flex">
-                                    {{ $top->user->name }}
+                                    {{ $provinsis->provinsi }}
                                 </div>
                             </td>
                             <td>
-                                <div class="d-flex">
-                                    Rp. {{ number_format($top->saldo , 0, ',', '.') }}
-                                </div>
-                            </td>
-                            <td>
-                                <div class="d-flex">
-                                    {{ $top->metode->metode}}
-                                </div>
-                            </td>
-                            {{-- <td>
-                                <form action="{{ route('topup.destroy', $top->id) }}" method="post">
+                                <form action="{{ route('provinsi.destroy', $provinsis->id) }}" method="post">
                                     @csrf
                                     @method('delete')
-                                    <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#defaultModal{{ $top->id }}"> Hapus </button>
-                                    <div class="modal fade" id="defaultModal{{ $top->id }}" tabindex="-1" role="dialog" aria-labelledby="defaultModalLabel" aria-hidden="true">
+                                    <a href="{{ route('provinsi.edit', $provinsis->id) }}"
+                                        class="btn btn-sm btn-secondary" data-bs-toggle="tooltip"
+                                        data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true"
+                                        title="Edit Data">
+                                        edit
+                                    </a> |
+                                    <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#defaultModal{{ $provinsis->id }}"> Hapus </button>
+                                    <div class="modal fade" id="defaultModal{{ $provinsis->id }}" tabindex="-1" role="dialog" aria-labelledby="defaultModalLabel " aria-hidden="true">
                                       <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                           <div class="modal-header">
@@ -71,8 +64,10 @@
                                         </div>
                                       </div>
                                     </div>
+                                    
+              
                                 </form>
-                            </td> --}}
+                            </td>
                         </tr>
                     @endforeach
                   @endif
@@ -84,8 +79,12 @@
         </div> <!-- simple table -->
       </div> <!-- end section -->
     </div> <!-- .col-12 -->
-  </div> <!-- .row -->  
+  </div> <!-- .row -->
 </div>
 
+@include('admin.provinsi.create')
+
+
+    
 
 @endsection

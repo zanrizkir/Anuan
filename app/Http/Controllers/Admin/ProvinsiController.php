@@ -2,24 +2,29 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Admin\Image;
 use Illuminate\Http\Request;
+use App\Models\Admin\Provinsi;
 use App\Http\Controllers\Controller;
 
-class ImageController extends Controller
+class ProvinsiController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct()
+
+     public function __construct()
     {
         $this->middleware('auth');
     }
+
     public function index()
     {
-        //
+        $provinsi = Provinsi::all();
+        $active = 'provinsi';
+        return view('admin.provinsi.index', compact('provinsi','active'));
+
     }
 
     /**
@@ -29,7 +34,7 @@ class ImageController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.kategori.create');
     }
 
     /**
@@ -41,30 +46,24 @@ class ImageController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'gambar_produk' => 'required',
+            'provinsi' => 'required|unique:provinsis',
         ]);
 
-        if ($request->hasfile('gambar_produk')) {
-            foreach ($request->file('gambar_produk') as $image) {
-                $name = rand(1000, 9999) . $image->getClientOriginalName();
-                $image->move('images/gambar_produk/', $name);
-                $images = new Image();
-                $images->produk_id = $request->produk_id;
-                $images->gambar_produk = 'images/gambar_produk/' . $name;
-                $images->save();
-            }
-            return back()->with('toast_success', 'Data Berhasil Ditambahkan');
-        }
+
+        $provinsi = new Provinsi();
+        $provinsi->provinsi = $request->provinsi;
+        $provinsi->save();
+        return redirect()->route('provinsi.index')->with('toast_success', 'Data Berhasil Ditambahkan');
 
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Admin\Provinsi  $provinsi
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Provinsi $provinsi)
     {
         //
     }
@@ -72,10 +71,10 @@ class ImageController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Admin\Provinsi  $provinsi
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Provinsi $provinsi)
     {
         //
     }
@@ -84,10 +83,10 @@ class ImageController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Admin\Provinsi  $provinsi
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Provinsi $provinsi)
     {
         //
     }
@@ -95,16 +94,17 @@ class ImageController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Admin\Provinsi  $provinsi
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $images = Image::findOrFail($id);
-        $images->deleteImage();
-        $images->delete();
+        // if (!Provinsi::destroy($id)){
+        //     return redirect()->back();
+        // }
 
-        return back()->with('toast_success', 'Data Berhasil Dihapus');
-
+        $provinsi = Provinsi::findOrFail($id);
+        $provinsi->delete();
+        return redirect()->back()->with('toast_success', 'Data Berhasil Dihapus');
     }
 }

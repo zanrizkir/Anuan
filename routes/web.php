@@ -4,14 +4,17 @@ use App\Models\Admin\Produk;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Admin\KotaController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ImageController;
+use App\Http\Controllers\Admin\TopUpController;
 use App\Http\Controllers\Admin\ProdukController;
 use App\Http\Controllers\Admin\KategoriController;
-use App\Http\Controllers\Admin\MetodePembayaranController;
+use App\Http\Controllers\Admin\ProvinsiController;
+use App\Http\Controllers\Admin\KeranjangController;
 use App\Http\Controllers\Admin\SubKategoriController;
 use App\Http\Controllers\Admin\RiwayatProdukController;
-use App\Http\Controllers\Admin\TopUpController;
+use App\Http\Controllers\Admin\MetodePembayaranController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,8 +54,10 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::resource('/user', UserController::class);
     Route::resource('/metode', MetodePembayaranController::class);
     Route::resource('/topup', TopUpController::class);
-    // Route::resource('/riwayatProduk', RiwayatProdukController::class);
+    Route::resource('/keranjang', KeranjangController::class);
     Route::get('getSub_kategori/{id}', [SubKategoriController::class, 'getSubKategori']);
+    Route::resource('/provinsi', ProvinsiController::class);
+    Route::resource('/kota', KotaController::class);
 });
 
 

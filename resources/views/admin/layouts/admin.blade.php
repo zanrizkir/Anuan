@@ -3,7 +3,7 @@
   <head>
     @include('admin.components.topscript')
   </head>
-  <body class="vertical  light  ">
+  <body class="vertical light  ">
     <div class="wrapper">
       @include('admin.layouts.components.navbar')
       <aside class="sidebar-left border-right bg-white shadow" id="leftSidebar" data-simplebar>

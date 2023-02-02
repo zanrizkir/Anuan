@@ -6,6 +6,7 @@ use App\Models\Admin\Kota;
 use Illuminate\Http\Request;
 use App\Models\Admin\Provinsi;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 
 class KotaController extends Controller
 {
@@ -34,7 +35,9 @@ class KotaController extends Controller
      */
     public function create()
     {
-        //
+        $provinsi = Provinsi::all();
+        return view('admin.kota.create',['active' => 'kota'], compact('provinsi'));
+        
     }
 
     /**
@@ -45,7 +48,21 @@ class KotaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'provinsi_id' => 'required',
+            'kota' => 'required|string|max:255|unique:kotas',
+        ]);
+
+        if ($validator->fails()) {
+            return back()->with('errors', $validator->messages()->all()[0])->withInput();
+        }
+
+        $kota = new Kota();
+        $kota->provinsi_id = $request->provinsi_id;
+        $kota->kota = $request->kota;
+        $kota->save();
+        return redirect()
+        ->route('kota.index')->with('toast_success', 'Data Berhasil Ditambahkan');
     }
 
     /**
@@ -91,5 +108,11 @@ class KotaController extends Controller
     public function destroy(Kota $kota)
     {
         //
+    }
+
+    public function getKota($id)
+    {
+        $kotas = Kota::where('provinsi_id', $id)->get();
+        return response()->json($kotas);
     }
 }

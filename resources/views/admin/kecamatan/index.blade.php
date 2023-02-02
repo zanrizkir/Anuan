@@ -5,37 +5,33 @@
 <div class="container-fluid">
   <div class="row justify-content-center">
     <div class="col-12">
-      <h2 class="mb-2 page-title">Data Produk</h2>
+      <h2 class="mb-2 page-title">Data Kota/Kabupaten</h2>
       @include('sweetalert::alert')
       <div class="row my-4">
         <!-- Small table -->
         <div class="col-md-12">
           <div class="card shadow-lg">
             <div class="card-body">
-              <div class="">
-                <a href="{{ Route('produk.create') }}" class="btn mb-3 btn-primary" data-bs-toggle="tooltip"
+              <div class="text-left">
+                <a href="{{ Route('kecamatan.create') }}" class="btn mb-3 btn-primary" data-bs-toggle="tooltip"
                 data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true"
                 title="Tambah Data">Tambah Data</a>
-                <button type="button" class="btn mb-3 btn-primary" data-toggle="modal" data-target="#varyModal" data-whatever="@mdo">Set Stok</button>
-                @include('admin.produk.stok')
+                {{-- <button type="button" class="btn mb-2 btn-outline-primary" data-toggle="modal" data-target="#subModal" data-whatever="@mdo">Tambah Data</button>
+                @include('admin.kecamatan.create') --}}
               </div>
               <table class="table datatables table-bordered table-hover" id="dataTable">
                 <thead class="thead-dark">
                   <tr>
                     <th>No</th>
-                    <th>kategori</th>
-                    <th>Sub kategori</th>
-                    <th>Nama Produk</th>
-                    <th>Hpp</th>
-                    <th>Harga</th>
-                    <th>Stock</th>
-                    <th>Diskon</th>
+                    <th>Provinsi</th>
+                    <th>Kota/Kabupaten</th>
+                    <th>Kecamatan</th>
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                  @if (count($produk))
-                    @foreach ($produk as $pro)
+                  @if (count($kecamatan))
+                    @foreach ($kecamatan as $kec)
                         <tr>
                             <td>
                                 <div class="d-flex">
@@ -44,57 +40,31 @@
                             </td>
                             <td>
                                 <div class="d-flex">
-                                    {{ $pro->kategori->name }}
+                                    {{ $kec->provinsi->provinsi }}
                                 </div>
                             </td>
                             <td>
                                 <div class="d-flex">
-                                    {{ $pro->subkategori->name }}
+                                    {{ $kec->kota->kota }}
                                 </div>
                             </td>
                             <td>
                                 <div class="d-flex">
-                                    {{ $pro->nama_produk }}
+                                    {{ $kec->kecamatan }}
                                 </div>
                             </td>
                             <td>
-                                <div class="d-flex">
-                                    Rp. {{ number_format($pro->hpp , 0, ',', '.') }}
-                                </div>
-                            </td>
-                            <td>
-                                <div class="d-flex">
-                                    Rp. {{ number_format($pro->harga, 0, ',', '.') }}
-                                </div>
-                            </td>
-                            <td>
-                                <div class="d-flex">
-                                    {{ $pro->stok }}
-                                </div>
-                            </td>
-                            <td>
-                                <div class="d-flex">
-                                    {{ $pro->diskon }}%
-                                </div>
-                            </td>
-                            <td>
-                                <form action="{{ route('produk.destroy', $pro->id) }}" method="post">
+                                <form action="{{ route('kecamatan.destroy', $kec->id) }}" method="post">
                                     @csrf
                                     @method('delete')
-                                    <a href="{{ route('produk.show', $pro->id) }}"
-                                        class="btn btn-sm btn-warning" data-bs-toggle="tooltip"
-                                        data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true"
-                                        title="Show Data">
-                                        S
-                                    </a> |
-                                    <a href="{{ route('produk.edit', $pro->id) }}"
+                                    <a href="{{ route('kecamatan.edit', $kec->id) }}"
                                         class="btn btn-sm btn-secondary" data-bs-toggle="tooltip"
                                         data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true"
                                         title="Edit Data">
                                         edit
                                     </a> |
-                                    <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#defaultModal{{ $pro->id }}"> Hapus </button>
-                                    <div class="modal fade" id="defaultModal{{ $pro->id }}" tabindex="-1" role="dialog" aria-labelledby="defaultModalLabel" aria-hidden="true">
+                                    <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#defaultModal{{ $kec->id }}"> Hapus </button>
+                                    <div class="modal fade" id="defaultModal{{ $kec->id }}" tabindex="-1" role="dialog" aria-labelledby="defaultModalLabel" aria-hidden="true">
                                       <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                           <div class="modal-header">
@@ -105,7 +75,7 @@
                                           </div>
                                           <div class="modal-footer">
                                             <button type="button" class="btn mb-2 btn-secondary" data-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn mb-2 btn-primary">Hapus</button>
+                                            <button type="kotamit" class="btn mb-2 btn-primary">Hapus</button>
                                           </div>
                                         </div>
                                       </div>
@@ -125,6 +95,7 @@
     </div> <!-- .col-12 -->
   </div> <!-- .row -->  
 </div>
+
 
 
 

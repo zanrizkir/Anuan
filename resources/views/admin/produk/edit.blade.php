@@ -67,7 +67,7 @@
                         </div>
                         <div class="form-group mb-3">
                             <label for="example-palaceholder">Hpp Produk</label>
-                            <input type="number" name="hpp" class="form-control" @error('hpp') is-invalid @enderror
+                            <input type="number" min="1" name="hpp" class="form-control" @error('hpp') is-invalid @enderror
                             placeholder="Hpp Produk" value="{{ $produk->hpp }}">
                             @error('hpp')
                             <span class="invalid-feedback" role="alert">
@@ -77,7 +77,7 @@
                         </div>
                         <div class="form-group mb-3">
                             <label for="example-palaceholder">Harga Produk</label>
-                            <input type="number" name="harga" class="form-control" @error('harga') is-invalid @enderror
+                            <input type="number" min="1" name="harga" class="form-control" @error('harga') is-invalid @enderror
                             placeholder="Harga Produk" value="{{ $produk->harga }}">
                             @error('harga')
                                 <span class="invalid-feedback" role="alert">
@@ -87,7 +87,7 @@
                         </div>
                         <div class="form-group mb-3">
                             <label for="example-palaceholder">Stock Produk</label>
-                            <input type="number" name="stok"
+                            <input type="number" min="1" name="stok"
                             class="form-control @error('stok') is-invalid @enderror" placeholder="stok Produk"
                             value="{{ $produk->stok }}">
                             @error('stok')
@@ -99,7 +99,7 @@
                         <div class="form-group mb-3">
                             <label for="example-palaceholder">Diskon Produk</label>
                             <div class="input-group mb-3">
-                            <input type="number" name="diskon"
+                            <input type="number" min="0" name="diskon"
                                 class="form-control @error('diskon') is-invalid @enderror"
                                 placeholder="diskon Produk" value="{{ $produk->diskon }}">
                             <button class="btn btn-secondary mb-2" type="button">%</button>
@@ -172,8 +172,8 @@
                                            <form action="{{ Route('image.destroy', $img->id) }}" method="POST">
                                             @csrf
                                             @method('delete')
-                                                <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#defaultModal"> Hapus </button>
-                                                <div class="modal fade" id="defaultModal" tabindex="-1" role="dialog" aria-labelledby="defaultModalLabel {{ $img->id }}" aria-hidden="true">
+                                                <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#defaultModal{{ $img->id }}"> Hapus </button>
+                                                <div class="modal fade" id="defaultModal{{ $img->id }}" tabindex="-1" role="dialog" aria-labelledby="defaultModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">

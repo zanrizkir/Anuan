@@ -19,7 +19,7 @@
                                         <th>NO</th>
                                         <th>Nama Produk</th>
                                         <th>type</th>
-                                        <th>Qty</th>
+                                        <th>Jumlah</th>
                                         <th>Note</th>
                                         <th>Jam</th>
                                         <th>Tanggal</th>

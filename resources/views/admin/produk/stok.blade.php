@@ -42,7 +42,7 @@
                   </div>
                   <div class="col-6 mb-0">
                       <label class="form-label">qty</label>
-                      <input type="number" name="qty" class="form-control mb-2" placeholder="qty">
+                      <input type="number" min="1" name="qty" class="form-control mb-2" placeholder="qty">
                   </div>
               </div>
               <div class="row">
@@ -60,9 +60,6 @@
               
           </div>
           <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                  Kembali
-              </button>
               <button type="submit" class="btn btn-primary">Kirim</button>
           </div>
       </form>

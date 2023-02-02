@@ -24,7 +24,6 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn mb-2 btn-secondary" data-dismiss="modal">Tutup</button>
           <button type="submit" class="btn mb-2 btn-primary">Kirim</button>
         </div>
       </form>

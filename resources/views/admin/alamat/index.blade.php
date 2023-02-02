@@ -13,29 +13,26 @@
           <div class="card shadow-lg">
             <div class="card-body">
               <div class="">
-                <a href="{{ Route('produk.create') }}" class="btn mb-3 btn-primary" data-bs-toggle="tooltip"
-                data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true"
-                title="Tambah Data">Tambah Data</a>
-                <button type="button" class="btn mb-3 btn-primary" data-toggle="modal" data-target="#varyModal" data-whatever="@mdo">Set Stok</button>
-                @include('admin.produk.stok')
+                <button type="button" class="btn mb-3 btn-primary" data-toggle="modal" data-target="#varyModal" data-whatever="@mdo">Tambah Data</button>
+                @include('admin.alamat.create')
               </div>
               <table class="table datatables table-bordered table-hover" id="dataTable">
                 <thead class="thead-dark">
                   <tr>
                     <th>No</th>
-                    <th>kategori</th>
-                    <th>Sub kategori</th>
-                    <th>Nama Produk</th>
-                    <th>Hpp</th>
-                    <th>Harga</th>
-                    <th>Stock</th>
-                    <th>Diskon</th>
+                    <th>User</th>
+                    <th>Nama Lengkap</th>
+                    <th>No Telpon</th>
+                    <th>Provinsi</th>
+                    <th>Kota</th>
+                    <th>Kecamatan</th>
+                    <th>Tag</th>
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                  @if (count($produk))
-                    @foreach ($produk as $pro)
+                  @if (count($alamat))
+                    @foreach ($alamat as $alm)
                         <tr>
                             <td>
                                 <div class="d-flex">
@@ -44,57 +41,57 @@
                             </td>
                             <td>
                                 <div class="d-flex">
-                                    {{ $pro->kategori->name }}
+                                    {{ $alm->user->name }}
                                 </div>
                             </td>
                             <td>
                                 <div class="d-flex">
-                                    {{ $pro->subkategori->name }}
+                                    {{ $alm->nama_lengkap }}
                                 </div>
                             </td>
                             <td>
                                 <div class="d-flex">
-                                    {{ $pro->nama_produk }}
+                                    {{ $alm->telpon }}
+                                </div>
+                            </td>
+                            <td>
+                                <div class="d-flex">        
+                                    {{ $alm->provinsi->provinsi }}
                                 </div>
                             </td>
                             <td>
                                 <div class="d-flex">
-                                    Rp. {{ number_format($pro->hpp , 0, ',', '.') }}
+                                  {{ $alm->kota->kota }}
                                 </div>
                             </td>
                             <td>
                                 <div class="d-flex">
-                                    Rp. {{ number_format($pro->harga, 0, ',', '.') }}
+                                  {{ $alm->kecamatan->kecamatan }}
                                 </div>
                             </td>
                             <td>
                                 <div class="d-flex">
-                                    {{ $pro->stok }}
+                                    {{ $alm->tag }}
                                 </div>
                             </td>
                             <td>
-                                <div class="d-flex">
-                                    {{ $pro->diskon }}%
-                                </div>
-                            </td>
-                            <td>
-                                <form action="{{ route('produk.destroy', $pro->id) }}" method="post">
+                                <form action="{{ route('produk.destroy', $alm->id) }}" method="post">
                                     @csrf
                                     @method('delete')
-                                    <a href="{{ route('produk.show', $pro->id) }}"
+                                    <a href="{{ route('produk.show', $alm->id) }}"
                                         class="btn btn-sm btn-warning" data-bs-toggle="tooltip"
                                         data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true"
                                         title="Show Data">
                                         S
                                     </a> |
-                                    <a href="{{ route('produk.edit', $pro->id) }}"
+                                    <a href="{{ route('produk.edit', $alm->id) }}"
                                         class="btn btn-sm btn-secondary" data-bs-toggle="tooltip"
                                         data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true"
                                         title="Edit Data">
                                         edit
                                     </a> |
-                                    <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#defaultModal{{ $pro->id }}"> Hapus </button>
-                                    <div class="modal fade" id="defaultModal{{ $pro->id }}" tabindex="-1" role="dialog" aria-labelledby="defaultModalLabel" aria-hidden="true">
+                                    <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#defaultModal{{ $alm->id }}"> Hapus </button>
+                                    <div class="modal fade" id="defaultModal{{ $alm->id }}" tabindex="-1" role="dialog" aria-labelledby="defaultModalLabel" aria-hidden="true">
                                       <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                           <div class="modal-header">
@@ -113,7 +110,7 @@
                                 </form>
                             </td>
                         </tr>
-                    @endforeach
+                    @endforeach 
                   @endif
 
                 </tbody>

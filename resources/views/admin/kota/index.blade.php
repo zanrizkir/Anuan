@@ -12,8 +12,8 @@
         <div class="col-md-12">
           <div class="card shadow-lg">
             <div class="card-body">
-              <div class="text-right">
-                <button type="button" class="btn mb-2 btn-outline-primary" data-toggle="modal" data-target="#kotaModal" data-whatever="@mdo">Tambah Data</button>
+              <div class="text-left">
+                <button type="button" class="btn mb-2 btn-outline-primary" data-toggle="modal" data-target="#subModal" data-whatever="@mdo">Tambah Data</button>
                 @include('admin.kota.create')
               </div>
               <table class="table datatables table-bordered table-hover" id="dataTable">

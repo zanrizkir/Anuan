@@ -8,9 +8,11 @@ use App\Http\Controllers\Admin\KotaController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ImageController;
 use App\Http\Controllers\Admin\TopUpController;
+use App\Http\Controllers\Admin\AlamatController;
 use App\Http\Controllers\Admin\ProdukController;
 use App\Http\Controllers\Admin\KategoriController;
 use App\Http\Controllers\Admin\ProvinsiController;
+use App\Http\Controllers\Admin\KecamatanController;
 use App\Http\Controllers\Admin\KeranjangController;
 use App\Http\Controllers\Admin\SubKategoriController;
 use App\Http\Controllers\Admin\RiwayatProdukController;
@@ -58,6 +60,10 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::get('getSub_kategori/{id}', [SubKategoriController::class, 'getSubKategori']);
     Route::resource('/provinsi', ProvinsiController::class);
     Route::resource('/kota', KotaController::class);
+    Route::resource('/kecamatan', KecamatanController::class);
+    Route::get('getKota/{id}', [KotaController::class, 'getKota']);
+    Route::resource('/alamat', AlamatController::class);
+    Route::get('getKecamatan/{id}', [KecamatanController::class, 'getKecamatan']);
 });
 
 

@@ -5,7 +5,7 @@
 <div class="container-fluid">
   <div class="row justify-content-center">
     <div class="col-12">
-      <h2 class="mb-2 page-title">Data kategori</h2>
+      <h2 class="mb-2 page-title">Data kategori Produk</h2>
       @include('sweetalert::alert')
       <div class="row my-4">
         <!-- Small table -->
@@ -19,7 +19,7 @@
                 <thead class="thead-dark">
                   <tr>
                     <th>No</th>
-                    <th>Name</th>
+                    <th>Nama</th>
                     <th>Action</th>
                   </tr>
                 </thead>

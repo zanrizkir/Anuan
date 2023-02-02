@@ -18,4 +18,12 @@ class UserController extends Controller
         
         return view('admin.user.index',['active' => 'user'], compact('users'));
     }
+
+    public function destroy($id)
+    {
+        $users = User::findOrFail($id);
+        $users->delete();
+        return redirect()
+            ->route('user.index')->with('toast_success', 'Data Berhasil Dihapus');
+    }
 }

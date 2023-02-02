@@ -1,12 +1,20 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\Admin\Kecamatan;
 use Illuminate\Http\Request;
+use App\Models\Admin\Provinsi;
+use App\Models\Admin\Kecamatan;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 
 class KecamatanController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,9 +22,10 @@ class KecamatanController extends Controller
      */
     public function index()
     {
-        //
+        $kecamatan = Kecamatan::with('provinsi','kota')->get();
+        return view('admin.kecamatan.index',['active' => 'kecamatan'],compact('kecamatan'));
     }
-
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -24,7 +33,9 @@ class KecamatanController extends Controller
      */
     public function create()
     {
-        //
+        $provinsi = Provinsi::all();
+        return view('admin.kecamatan.create',['active' => 'kecamatan'],compact('provinsi'));
+
     }
 
     /**
@@ -35,7 +46,23 @@ class KecamatanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'provinsi_id' => 'required',
+            'kota_id' => 'required',
+            'kecamatan' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return back()->with('errors', $validator->messages()->all()[0])->withInput();
+        }
+
+        $kecamatan = New Kecamatan();
+        $kecamatan->provinsi_id = $request->provinsi_id;
+        $kecamatan->kota_id = $request->kota_id;
+        $kecamatan->kecamatan = $request->kecamatan;
+        $kecamatan->save();
+        return redirect()
+        ->route('kecamatan.index')->with('toast_success', 'Data Berhasil Ditambahkan');
     }
 
     /**
@@ -46,7 +73,7 @@ class KecamatanController extends Controller
      */
     public function show(Kecamatan $kecamatan)
     {
-        //
+        
     }
 
     /**
@@ -57,7 +84,7 @@ class KecamatanController extends Controller
      */
     public function edit(Kecamatan $kecamatan)
     {
-        //
+        
     }
 
     /**
@@ -67,9 +94,25 @@ class KecamatanController extends Controller
      * @param  \App\Models\Admin\Kecamatan  $kecamatan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Kecamatan $kecamatan)
+    public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'provinsi_id' => 'required',
+            'kota_id' => 'required',
+            'kecamatan' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return back()->with('errors', $validator->messages()->all()[0])->withInput();
+        }
+
+        $kecamatan = Kecamatan::findOrFail($id);
+        $kecamatan->provinsi_id = $request->provinsi_id;
+        $kecamatan->kota_id = $request->kota_id;
+        $kecamatan->kecamatan = $request->kecamatan;
+        $kecamatan->save();
+        return redirect()
+        ->route('kecamatan.index')->with('toast_success', 'Data Berhasil Ditambahkan');
     }
 
     /**
@@ -78,8 +121,17 @@ class KecamatanController extends Controller
      * @param  \App\Models\Admin\Kecamatan  $kecamatan
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Kecamatan $kecamatan)
+    public function destroy($id)
     {
-        //
+        $kecamatan = Kecamatan::findOrFail($id);
+        $kecamatan->delete();
+        return redirect()
+            ->route('kecamatan.index')->with('toast_success', 'Data Berhasil Dihapus');
+    }
+
+    public function getKecamatan($id)
+    {
+        $kecamatan = Kecamatan::where('kota_id', $id)->get();
+        return response()->json($kecamatan);
     }
 }

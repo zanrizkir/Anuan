@@ -51,17 +51,17 @@
             </div>
             <div class="form-group mb-3">
               <label for="example-palaceholder">Hpp Produk</label>
-              <input type="number" name="hpp" class="form-control" @error('hpp') is-invalid @enderror
+              <input type="number" min="1"  name="hpp" class="form-control" @error('hpp') is-invalid @enderror
               placeholder="Hpp Produk" value="{{ old('name_produk') }}">
             </div>
             <div class="form-group mb-3">
               <label for="example-palaceholder">Harga Produk</label>
-              <input type="number" name="harga" class="form-control" @error('harga') is-invalid @enderror
+              <input type="number" min="1" name="harga" class="form-control" @error('harga') is-invalid @enderror
               placeholder="Harga Produk" value="{{ old('name_produk') }}">
             </div>
             <div class="form-group mb-3">
               <label for="example-palaceholder">Stock Produk</label>
-              <input type="number" name="stok"
+              <input type="number" min="1" name="stok"
               class="form-control @error('stok') is-invalid @enderror" placeholder="stok Produk"
               value="0">
               @error('stok')
@@ -73,8 +73,8 @@
             <div class="form-group mb-3">
               <label for="example-palaceholder">Diskon Produk</label>
               <div class="input-group mb-3">
-                <input type="number" name="diskon"
-                    class="form-control @error('diskon') is-invalid @enderror"
+                <input type="number" name="diskon" min="0"
+                    class="form-control  @error('diskon') is-invalid @enderror"
                     placeholder="diskon Produk" value="0">
                 <button class="btn btn-secondary mb-2" type="button">%</button>
                 @error('diskon')

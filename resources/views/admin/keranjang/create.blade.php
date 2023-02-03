@@ -44,7 +44,7 @@
                             </span>
                         @enderror
                     </div>
-                    <div class="mb-3">
+                    {{-- <div class="mb-3">
                         <label class="form-label">Ukuran</label>
                         <select name="ukuran"
                             class="form-control @error('ukuran') is-invalid @enderror">
@@ -60,7 +60,7 @@
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
-                    </div>
+                    </div> --}}
                     <div class="mb-3">
                         <label class="form-label">jumlah Produk</label>
                         <input type="number" name="jumlah"

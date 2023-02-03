@@ -19,7 +19,6 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('produk_id');
             $table->foreign('produk_id')->references('id')->on('produks')->onDelete('cascade');
-            $table->enum('ukuran',['S',' M','L','XL','XXL']);
             $table->integer('jumlah');
             $table->integer('total_harga');
             $table->enum('status',['checkout','keranjang'])->default('keranjang');

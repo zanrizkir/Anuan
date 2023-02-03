@@ -35,7 +35,7 @@ Route::get('/', function () {
 
 
 Route::get('/template', function () {
-    return view('layouts.admin');
+    return view('user.layouts.user');
 });
 
 Auth::routes();
@@ -64,6 +64,10 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::get('getKota/{id}', [KotaController::class, 'getKota']);
     Route::resource('/alamat', AlamatController::class);
     Route::get('getKecamatan/{id}', [KecamatanController::class, 'getKecamatan']);
+});
+
+Route::prefix('user')->middleware(['auth', 'costumer'])->group(function () {  
+    
 });
 
 

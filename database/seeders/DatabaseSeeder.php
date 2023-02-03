@@ -21,7 +21,8 @@ class DatabaseSeeder extends Seeder
             // SubKategoriSeeder::class,
             // ProdukSeeder::class,
             UserSeeder::class,
-            // VoucherSeeder::class,
+            ProvinsiSeeder::class,
+            KotaSeeder::class,
         ]);
     }
 }

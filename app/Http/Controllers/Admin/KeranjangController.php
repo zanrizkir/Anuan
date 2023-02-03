@@ -61,7 +61,6 @@ class KeranjangController extends Controller
         $keranjangs = new Keranjang();
         $keranjangs->user_id = $request->user_id;
         $keranjangs->produk_id = $request->produk_id;
-        $keranjangs->ukuran = $request->ukuran;
         $keranjangs->jumlah = $request->jumlah;
         $diskon = (($keranjangs->produk->diskon / 100) * $keranjangs->produk->harga);
         $keranjangs->total_harga = ($keranjangs->produk->harga * $request->jumlah) - $diskon;

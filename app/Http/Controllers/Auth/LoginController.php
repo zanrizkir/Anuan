@@ -31,10 +31,10 @@ class LoginController extends Controller
 
     protected function authenticated()
     {
-        if (Auth::user()->role == 'admin') {
+        if (Auth::user()->role === 'admin') {
             return redirect('/admin/dashboard');
         } else {
-            return redirect('/home');
+            return redirect('/');
         }
     }
 

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\KotaController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\User\FrontController;
 use App\Http\Controllers\Admin\ImageController;
 use App\Http\Controllers\Admin\TopUpController;
 use App\Http\Controllers\Admin\AlamatController;
@@ -30,17 +31,8 @@ use App\Http\Controllers\Admin\MetodePembayaranController;
 */
 
 Route::get('/', function () {
-    return view('auth.login');
+    return view('template');
 });
-
-
-Route::get('/template', function () {
-    return view('user.layouts.user');
-});
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {  
     Route::get('/dashboard', function () {
@@ -66,8 +58,16 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::get('getKecamatan/{id}', [KecamatanController::class, 'getKecamatan']);
 });
 
-Route::prefix('user')->middleware(['auth', 'costumer'])->group(function () {  
-    
+Auth::routes();
+Route::group(['prefix' => '/'], function () {
+    Route::get('/produk', [FrontController::class, 'produkuser']);
+    Route::get('/detailproduk/{id}', [FrontController::class, 'produkdetail']);
+    Route::resource('/keranjang', KeranjangController::class);
 });
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/user', [App\Http\Controllers\HomeController::class, 'user'])->name('user');
+
+
+
 
 

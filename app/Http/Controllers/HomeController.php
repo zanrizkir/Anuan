@@ -26,4 +26,8 @@ class HomeController extends Controller
         $active = 'home';
         return view('home', compact('active'));
     }
+    public function user()
+     {
+         return view('user');
+     }
 }

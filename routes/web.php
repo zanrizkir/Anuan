@@ -4,6 +4,7 @@ use App\Models\Admin\Produk;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\KotaController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\User\FrontController;
@@ -13,6 +14,7 @@ use App\Http\Controllers\Admin\AlamatController;
 use App\Http\Controllers\Admin\ProdukController;
 use App\Http\Controllers\Admin\KategoriController;
 use App\Http\Controllers\Admin\ProvinsiController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\KecamatanController;
 use App\Http\Controllers\Admin\KeranjangController;
 use App\Http\Controllers\Admin\SubKategoriController;
@@ -34,13 +36,10 @@ Route::get('/', function () {
     return view('template');
 });
 
-Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {  
-    Route::get('/dashboard', function () {
-        return view('admin.layouts.admin', [
-            'active' => 'kategori'
-        ]);
-    });
+Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
+    Route::resource('/dashboard',DashboardController::class);
     Route::resource('/kategori', KategoriController::class);
+    Route::resource('/tag', TagController::class);
     Route::resource('/subkategori', SubKategoriController::class);
     Route::resource('/produk', ProdukController::class);
     Route::resource('/image', ImageController::class);

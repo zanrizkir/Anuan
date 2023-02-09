@@ -2,6 +2,7 @@
 
 namespace App\Models\Admin;
 
+use App\Models\Admin\Tag;
 use App\Models\Admin\Image;
 use App\Models\Admin\Kategori;
 use App\Models\Admin\Keranjang;
@@ -19,9 +20,8 @@ class Produk extends Model
         return $this->belongsTo(Kategori::class);
     }
 
-    public function subKategori()
-    {
-        return $this->belongsTo(SubKategori::class);
+    public function tag(){
+        return $this->belongsToMany(Tag::class, 'product_tags');
     }
 
     public function image()
@@ -37,6 +37,11 @@ class Produk extends Model
     public function keranjang()
     {
         return $this->hasMany(Keranjang::class);
+    }
+
+    public function tags()
+    {
+        return $this->hasMany(Tag::class);
     }
 
 }

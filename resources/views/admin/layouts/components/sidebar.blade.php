@@ -16,8 +16,8 @@
       <span>Data</span>
     </p>
     <ul class="navbar-nav flex-fill w-100 mb-2">
-      <li class="nav-item w-100 ">
-        <a class="nav-link " href="#">
+      <li class="nav-item w-100 {{ $active == 'Dashboard' ? 'active' : null }}">
+        <a class="nav-link " href="/admin/dashboard">
           <i class="fe fe-home fe-16"></i>
           <span class="ml-3 item-text">Dashboard</span>
         </a>
@@ -39,7 +39,7 @@
       <li class="nav-item dropdown">
         <a href="#ui-elements" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
           <i class="fe fe-box fe-16"></i>
-          <span class="ml-3 item-text">Category </span>
+          <span class="ml-3 item-text">Komponent </span>
         </a>
         <ul class="collapse list-unstyled pl-4 w-100" id="ui-elements">
           <li class="nav-item {{ $active == 'kategori' ? 'active' : null }}">
@@ -51,10 +51,10 @@
           
         </ul>
         <ul class="collapse list-unstyled pl-4 w-100" id="ui-elements">
-          <li class="nav-item {{ $active == 'sub' ? 'active' : null }}">
-            <a class="nav-link pl-3 " href="/admin/subkategori">
+          <li class="nav-item {{ $active == 'tag' ? 'active' : null }}">
+            <a class="nav-link pl-3 " href="/admin/tag">
 
-              <span class="ml-1 item-text">Sub Kategori</span>
+              <span class="ml-1 item-text">Tag</span>
             </a>
           </li>
           

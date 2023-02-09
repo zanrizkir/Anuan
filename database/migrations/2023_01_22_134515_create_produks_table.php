@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Admin\Tag;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,8 +18,6 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('kategori_id');
             $table->foreign('kategori_id')->references('id')->on('kategoris')->onDelete('cascade');
-            $table->unsignedBigInteger('sub_kategori_id');
-            $table->foreign('sub_kategori_id')->references('id')->on('sub_kategoris')->onDelete('cascade');
             $table->string('nama_produk');
             $table->string('hpp');
             $table->string('harga');

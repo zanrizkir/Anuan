@@ -149,6 +149,8 @@ return [
         * Package Service Providers...
         */
         RealRashid\SweetAlert\SweetAlertServiceProvider::class,
+        AzisHapidin\IndoRegion\IndoRegionServiceProvider::class,
+
     ],
 
     /*

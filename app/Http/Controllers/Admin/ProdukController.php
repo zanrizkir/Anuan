@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Models\Admin\Kategori;
 use App\Models\Admin\SubKategori;
 use App\Http\Controllers\Controller;
+use App\Models\Admin\ProdukTag;
+use App\Models\Admin\Tag;
 
 class ProdukController extends Controller
 {
@@ -22,7 +24,8 @@ class ProdukController extends Controller
     }
     public function index()
     {
-        $produk = Produk::with('kategori', 'subKategori')->latest()->get();
+        $produk = Produk::with('kategori','tag')->latest()->get();
+        
         return view('admin.produk.index',['active' => 'produk'], compact('produk'));
     }
 
@@ -34,8 +37,8 @@ class ProdukController extends Controller
     public function create()
     {
         $kategoris = Kategori::all();
-        // $sub = SubKategori::all();
-        return view('admin.produk.create',['active' => 'produk'], compact('kategoris'));
+        $tag = Tag::all();
+        return view('admin.produk.create',['active' => 'produk'], compact('kategoris','tag'));
     }
 
     /**
@@ -48,7 +51,7 @@ class ProdukController extends Controller
     {
         $validated = $request->validate([
             'kategori_id' => 'required',
-            'sub_kategori_id' => 'required',
+            'tag_id' => 'required',
             'nama_produk' => 'required',
             'hpp' => 'required',
             'harga' => 'required',
@@ -58,7 +61,6 @@ class ProdukController extends Controller
 
         $produk = new Produk();
         $produk->kategori_id = $request->kategori_id;
-        $produk->sub_kategori_id = $request->sub_kategori_id;
         $produk->nama_produk = $request->nama_produk;
         $produk->hpp = $request->hpp;
         $produk->harga = $request->harga;
@@ -67,6 +69,13 @@ class ProdukController extends Controller
         $produk->deskripsi = $request->deskripsi;
         $produk->save();
 
+        // dd($request->tag_id);
+        foreach ($produk as $pro){
+            ProdukTag::create([
+                'produk_id' => $produk->id,
+                'tag_id' => $request->tag_id
+            ]);
+        }
         if ($request->hasfile('gambar_produk')) {
             foreach ($request->file('gambar_produk') as $image) {
                 $name = rand(1000, 9999) . $image->getClientOriginalName();
@@ -93,9 +102,10 @@ class ProdukController extends Controller
     {
         $produk = Produk::findOrFail($id);
         $kategoris = Kategori::all();
-        $subKategoris = SubKategori::where('kategori_id', $produk->kategori_id)->get();
+        $tag = Tag::all();
+        // $subKategoris = SubKategori::where('kategori_id', $produk->kategori_id)->get();
         $images = Image::where('produk_id', $id)->get();
-        return view('admin.produk.show',['active' => 'produk'], compact('kategoris', 'produk', 'subKategoris', 'images'));
+        return view('admin.produk.show',['active' => 'produk'], compact('kategoris', 'produk', 'tag', 'images'));
     }
 
     /**
@@ -108,7 +118,8 @@ class ProdukController extends Controller
     {
         $produk = Produk::findOrFail($id);
         $kategoris = Kategori::all();
-        $subKategoris = SubKategori::where('kategori_id', $produk->kategori_id)->get();
+        $tag = Tag::all();
+        // $subKategoris = SubKategori::where('kategori_id', $produk->kategori_id)->get();
         $images = Image::where('produk_id', $id)->get();
         return view('admin.produk.edit',['active' => 'produk'], compact('kategoris', 'produk', 'subKategoris', 'images'));
 
@@ -125,7 +136,7 @@ class ProdukController extends Controller
     {
         $validated = $request->validate([
             'kategori_id' => 'required',
-            'sub_kategori_id' => 'required',
+            'tag_id' => 'required',
             'nama_produk' => 'required',
             'hpp' => 'required',
             'harga' => 'required',
@@ -135,7 +146,7 @@ class ProdukController extends Controller
 
         $produk = Produk::findOrFail($id);
         $produk->kategori_id = $produk->kategori_id;
-        $produk->sub_kategori_id = $request->sub_kategori_id;
+        $produk->tag_id = $request->tag_id;
         $produk->nama_produk = $request->nama_produk;
         $produk->hpp = $request->hpp;
         $produk->harga = $request->harga;

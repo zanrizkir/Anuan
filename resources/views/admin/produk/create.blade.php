@@ -6,21 +6,29 @@
     <div class="card-header">
       <strong class="card-title">Tambah Data</strong>
     </div>
-    <form action="{{ route('produk.store') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('produk.store') }}" method="POST" enctype="multipart/form-data" >
       @csrf
       <div class="card-body">
         <div class="row">
           <div class="col-md-12">
             <div class="form-group mb-3">
               <label class="form-label">Name Kategori</label>
-              <select name="kategori_id" id="kategori"
+              <select name="kategori_id" class="form-control select2 @error('kategori_id') is-invalid @enderror" id="simple-select2">
+                <optgroup label="Pilih Kategori">
+                  <option value="" hidden>Pilih Kategori</option>
+                  @foreach ($kategoris as $kategori)
+                  <option value="{{ $kategori->id }}">{{ $kategori->name }}</option>
+                  @endforeach
+                </optgroup>
+              </select>
+              {{-- <select name="kategori_id" id="kategori"
               class="form-control @error('kategori_id') is-invalid @enderror">
               @foreach ($kategoris as $kategori)
                   <option value="" hidden>Pilih Kategori</option>
                   <option value="{{ $kategori->id }}">{{ $kategori->name }}
                   </option>
               @endforeach
-              </select>
+              </select> --}}
               @error('kategori_id')
                   <span class="invalid-feedback" role="alert">
                       <strong>{{ $message }}</strong>
@@ -28,16 +36,34 @@
               @enderror
             </div>
             <div class="mb-3">
-              <label class="form-label">Sub Kategori</label>
-              <select name="sub_kategori_id" id="sub_kategori"
-                  class="form-control @error('sub_kategori_id') is-invalid @enderror">
-                  <option value="" hidden>Pilih Kategori Terlebih dulu</option>
+              <label for="multi-select2">Tag</label>
+              <select class="form-control select2-multi @error('tag_id') is-invalid @enderror" id="multi-select2" name="tag_id[]">
+                {{-- <option value="" hidden>Pilih Tag</option> --}}
+                <optgroup label="Pilih Tag">
+                  @foreach ($tag as $tg)
+                  <option value="{{ $tg->id }}">{{ $tg->name }}</option>
+                  @endforeach
+                </optgroup>
               </select>
-              @error('sub_kategori_id')
+              @error('tag_id')
                   <span class="invalid-feedback" role="alert">
                       <strong>{{ $message }}</strong>
                   </span>
               @enderror
+              {{-- <label class="form-label">Tag</label>
+              <select name="tag_id" id="tag"
+              class="form-control @error('tag_id') is-invalid @enderror">
+              @foreach ($tag as $tg)
+                  <option value="" hidden>Pilih Tag</option>
+                  <option value="{{ $tg->id }}">{{ $tg->name }}
+                  </option>
+              @endforeach
+              </select>
+              @error('tag_id')
+                  <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                  </span>
+              @enderror --}}
           </div>
             <div class="form-group mb-3">
               <label for="example-password">Nama Produk</label>
@@ -86,29 +112,42 @@
             </div>
             <div class="form-group mb-3">
               <label for="example-palaceholder">Deskripsi</label>
-              <textarea name="deskripsi" cols="20" rows="5"
-                  class="form-control  @error('deskripsi') is-invalid @enderror" placeholder="deskripsi"
-                  value="{{ old('deskripsi') }}"></textarea>
+              <input id="deskripsi" type="hidden" name="deskripsi" class="@error('deskripsi') is-invalid @enderror" >
+              <trix-editor input="deskripsi"></trix-editor>
               @error('deskripsi')
                   <span class="invalid-feedback" role="alert">
                       <strong>{{ $message }}</strong>
                   </span>
               @enderror
             </div>
+            
+            {{-- <div class="form-group mb-3">
+              <label for="example-palaceholder">Deskripsi</label>
+              <textarea name="deskripsi" id="editor" cols="20" rows="5"
+                  class="form-control  @error('deskripsi') is-invalid @enderror"
+                  value="{{ old('deskripsi') }}"></textarea>
+              @error('deskripsi')
+                  <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                  </span>
+              @enderror
+            </div> --}}
+
+
             <div class="mb-3">
               <label class="form-label">gambar produk</label>
+              
               <div class="custom-file">
                 <input type="file" class="form-control-file @error('gambar_produk') is-invalid @enderror"
                     name="gambar_produk[]" value="{{ old('gambar_produk') }}" multiple>
-                {{-- <label class="custom-file-label" for="customFile">Choose file</label> --}}
                 @error('gambar_produk')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
                 @enderror
               </div>
-          </div>
-          </div> <!-- /.col -->
+            </div>
+        </div> <!-- /.col -->
           
         </div>
         <div class="d-flex float-end">
@@ -125,40 +164,6 @@
       </div>
     </form>
   </div>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script>
-        $(document).ready(function() {
-            $('#kategori').on('change', function() {
-                var kategori_id = $(this).val();
-                if (kategori_id) {
-                    $.ajax({
-                        url: '/admin/getSub_kategori/' + kategori_id,
-                        type: "GET",
-                        data: {
-                            "_token": "{{ csrf_token() }}"
-                        },
-                        dataType: "json",
-                        success: function(data) {
-                            if (data) {
-                                $('#sub_kategori').empty();
-                                $('#sub_kategori').append(
-                                    '<option hidden>Pilih Sub Kategori</option>');
-                                $.each(data, function(key, sub_kategori) {
-                                    $('select[name="sub_kategori_id"]').append(
-                                        '<option value="' + sub_kategori.id + '">' +
-                                        sub_kategori.name + '</option>');
-                                });
-                            } else {
-                                $('#sub_kategori').empty();
-                            }
-                        }
-                    });
-                } else {
-                    $('#sub_kategori').empty();
-                }
-            });
-        });
-    </script>
+  
 
 @endsection

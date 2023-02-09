@@ -24,7 +24,7 @@
                   <tr>
                     <th>No</th>
                     <th>kategori</th>
-                    <th>Sub kategori</th>
+                    <th>Tag</th>
                     <th>Nama Produk</th>
                     <th>Hpp</th>
                     <th>Harga</th>
@@ -49,7 +49,9 @@
                             </td>
                             <td>
                                 <div class="d-flex">
-                                    {{ $pro->subkategori->name }}
+                                  @foreach ($pro->tag as $item)
+                                  {{ $item->name }}
+                                  @endforeach
                                 </div>
                             </td>
                             <td>

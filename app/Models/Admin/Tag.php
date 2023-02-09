@@ -2,14 +2,16 @@
 
 namespace App\Models\Admin;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Tag extends Model
 {
     use HasFactory;
 
-    public function produk(){
-        return $this->belongsTo(Produk::class);
+    protected $fillable = ['tag'];
+
+        public function products(){
+        return $this->belongsToMany(Tag::class, 'product_tags');
     }
 }

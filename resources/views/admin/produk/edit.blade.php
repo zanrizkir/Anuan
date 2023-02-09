@@ -114,7 +114,7 @@
                             <label for="example-palaceholder">Deskripsi</label>
                             <textarea name="deskripsi" cols="20" rows="5"
                                 class="form-control  @error('deskripsi') is-invalid @enderror" placeholder="deskripsi"
-                                value="{{ $produk->deskripsi }}">{{ $produk->deskripsi }}</textarea>
+                                value="{{ $produk->deskripsi }}">{!! $produk->deskripsi !!}</textarea>
                             @error('deskripsi')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

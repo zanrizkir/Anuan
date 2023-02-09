@@ -17,12 +17,13 @@ class DatabaseSeeder extends Seeder
     
     {
         $this->call([
-            // KategoriSeeder::class,
-            // SubKategoriSeeder::class,
+            KategoriSeeder::class,
+            TagSeeder::class,
             // ProdukSeeder::class,
             UserSeeder::class,
             ProvinsiSeeder::class,
             KotaSeeder::class,
+            KecamatanSeeder::class,
         ]);
     }
 }

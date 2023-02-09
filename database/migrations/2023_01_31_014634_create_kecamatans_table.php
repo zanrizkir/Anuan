@@ -15,10 +15,11 @@ return new class extends Migration
     {
         Schema::create('kecamatans', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('provinsi_id');
-            $table->foreign('provinsi_id')->references('id')->on('provinsis')->onDelete('cascade');
-            $table->unsignedBigInteger('kota_id');
-            $table->foreign('kota_id')->references('id')->on('kotas')->onDelete('cascade');
+            // $table->unsignedBigInteger('provinsi_id');
+            // $table->foreign('provinsi_id')->references('id')->on('provinsis')->onDelete('cascade');
+            // $table->unsignedBigInteger('kota_id');
+            // $table->foreign('kota_id')->references('id')->on('kotas')->onDelete('cascade');
+            $table->integer('id_kota');
             $table->string('kecamatan');
             $table->timestamps();
         });

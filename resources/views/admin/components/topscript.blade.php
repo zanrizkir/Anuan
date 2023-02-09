@@ -25,3 +25,6 @@
 <link rel="stylesheet" href="{{ asset('DataTables/datatables.min.css') }}">
 
 <script src="{{asset('assets/js/jquery-3.5.1.js') }}"></script>
+
+<link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.0/dist/trix.css">
+<script type="text/javascript" src="https://unpkg.com/trix@2.0.0/dist/trix.umd.min.js"></script>

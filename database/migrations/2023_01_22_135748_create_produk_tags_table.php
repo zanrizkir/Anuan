@@ -13,12 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('kotas', function (Blueprint $table) {
+        Schema::create('produk_tags', function (Blueprint $table) {
             $table->id();
-            // $table->unsignedBigInteger('provinsi_id');
-            // $table->foreign('provinsi_id')->references('id')->on('provinsis')->onDelete('cascade');
-            $table->integer('id_provinsi');
-            $table->string('kota');
+            $table->foreignId('produk_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->foreignId('tag_id')->nullable()->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kotas');
+        Schema::dropIfExists('produk_tags');
     }
 };

@@ -24,6 +24,7 @@ return new class extends Migration
             $table->integer('stok');
             $table->integer('diskon')->default('0');
             $table->text('deskripsi');
+            $table->string('slug');
             $table->timestamps();
         });
     }

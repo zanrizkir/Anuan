@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Admin\Tag;
 use App\Models\Admin\Image;
+use Illuminate\Support\Str;
 use App\Models\Admin\Produk;
 use Illuminate\Http\Request;
 use App\Models\Admin\Kategori;
+use App\Models\Admin\ProdukTag;
 use App\Models\Admin\SubKategori;
 use App\Http\Controllers\Controller;
-use App\Models\Admin\ProdukTag;
-use App\Models\Admin\Tag;
 
 class ProdukController extends Controller
 {
@@ -24,9 +25,13 @@ class ProdukController extends Controller
     }
     public function index()
     {
-        $produk = Produk::with('kategori','tag')->latest()->get();
-        
-        return view('admin.produk.index',['active' => 'produk'], compact('produk'));
+        // $produk = Produk::with('kategori','tag')->latest()->get();
+        // return view('admin.produk.index',['active' => 'produk'], compact('produk'));
+
+        return view('admin.produk.index',['active' => 'produk'])->with([
+            'produk' => Produk::with(['kategori','tags'])->latest()->paginate(8),
+        ]);
+
     }
 
     /**
@@ -37,8 +42,13 @@ class ProdukController extends Controller
     public function create()
     {
         $kategoris = Kategori::all();
-        $tag = Tag::all();
-        return view('admin.produk.create',['active' => 'produk'], compact('kategoris','tag'));
+        // $tag = Tag::all();
+        // return view('admin.produk.create',['active' => 'produk'], compact('kategoris','tag'));
+
+        return view('admin.produk.create',compact('kategoris'),['active' => 'produk'])->with([
+            'tags' => Tag::all(),
+        ]);
+
     }
 
     /**
@@ -51,7 +61,7 @@ class ProdukController extends Controller
     {
         $validated = $request->validate([
             'kategori_id' => 'required',
-            'tag_id' => 'required',
+            'tags   ' => 'required',
             'nama_produk' => 'required',
             'hpp' => 'required',
             'harga' => 'required',
@@ -67,15 +77,22 @@ class ProdukController extends Controller
         $produk->stok = $request->stok;
         $produk->diskon = $request->diskon;
         $produk->deskripsi = $request->deskripsi;
+        $produk->slug = Str::slug($request->nama_produk);
         $produk->save();
 
         // dd($request->tag_id);
-        foreach ($produk as $pro){
-            ProdukTag::create([
-                'produk_id' => $produk->id,
-                'tag_id' => $request->tag_id
-            ]);
+        // foreach ($produk as $pro){
+        //     ProdukTag::create([
+        //         'produk_id' => $produk->id,
+        //         'tag_id' => $request->tag_id
+        //     ]);
+        // }
+
+        if($request->has('tags'))
+        {
+            $produk->tags()->attach($request->tags);
         }
+
         if ($request->hasfile('gambar_produk')) {
             foreach ($request->file('gambar_produk') as $image) {
                 $name = rand(1000, 9999) . $image->getClientOriginalName();

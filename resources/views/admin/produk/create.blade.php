@@ -37,8 +37,18 @@
             </div>
             <div class="mb-3">
               <label for="multi-select2">Tag</label>
-              <select class="form-control select2-multi @error('tag_id') is-invalid @enderror" id="multi-select2" name="tag_id[]">
-                {{-- <option value="" hidden>Pilih Tag</option> --}}
+              <select name="tags[]" class="form-control select2 select2-hidden-accessible @error('tags') is-invalid @enderror" multiple="" data-placeholder="Select a Tag" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                @foreach ($tags as $tag)
+                <option value="{{ $tag->id }}" {{ (collect(old('tags'))->contains($tag->id)) ? 'selected':'' }}>{{ $tag->name }}</option>
+                @endforeach
+            </select>
+                @error('tags')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+              {{-- <select class="form-control select2-multi @error('tag_id') is-invalid @enderror" id="multi-select2" name="tag_id[]">
+                <option value="" hidden>Pilih Tag</option>
                 <optgroup label="Pilih Tag">
                   @foreach ($tag as $tg)
                   <option value="{{ $tg->id }}">{{ $tg->name }}</option>
@@ -49,21 +59,8 @@
                   <span class="invalid-feedback" role="alert">
                       <strong>{{ $message }}</strong>
                   </span>
-              @enderror
-              {{-- <label class="form-label">Tag</label>
-              <select name="tag_id" id="tag"
-              class="form-control @error('tag_id') is-invalid @enderror">
-              @foreach ($tag as $tg)
-                  <option value="" hidden>Pilih Tag</option>
-                  <option value="{{ $tg->id }}">{{ $tg->name }}
-                  </option>
-              @endforeach
-              </select>
-              @error('tag_id')
-                  <span class="invalid-feedback" role="alert">
-                      <strong>{{ $message }}</strong>
-                  </span>
               @enderror --}}
+              
           </div>
             <div class="form-group mb-3">
               <label for="example-password">Nama Produk</label>
@@ -165,5 +162,17 @@
     </form>
   </div>
   
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+  <script>
+   $(document).ready(function() {
+      $('.select2').select2({
+      closeOnSelect: false
+      });
+  });
+</script>
+
+
 
 @endsection

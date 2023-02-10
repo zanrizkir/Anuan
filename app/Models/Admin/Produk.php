@@ -15,14 +15,16 @@ class Produk extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['nama_produk','hpp','harga','stok','diskon','deskripsi','slug'];
+
     public function kategori()
     {
         return $this->belongsTo(Kategori::class);
     }
 
-    public function tag(){
-        return $this->belongsToMany(Tag::class, 'product_tags');
-    }
+    // public function tag(){
+    //     return $this->belongsToMany(Tag::class, 'product_tags');
+    // }
 
     public function image()
     {
@@ -41,7 +43,7 @@ class Produk extends Model
 
     public function tags()
     {
-        return $this->hasMany(Tag::class);
+        return $this->belongsToMany(Tag::class)->as('tags');
     }
 
 }

@@ -4,8 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-
+use App\Models\Admin\Tag;
 
 class TagSeeder extends Seeder
 {
@@ -16,10 +15,43 @@ class TagSeeder extends Seeder
      */
     public function run()
     {
-        $tag = [
-            ['name' => 'gaming',],
-            ['name' => 'editing',],
+        $tags = [
+            [
+                'name' => 'Gaming',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'name' => 'Editing',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'name' => 'RGB',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'name' => 'wireless',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            // [
+            //     'name' => 'Css',
+            //     'created_at' => now(),
+            //     'updated_at' => now(),
+            // ],
+            // [
+            //     'name' => 'Php',
+            //     'created_at' => now(),
+            //     'updated_at' => now(),
+            // ],
+            // [
+            //     'name' => 'Python',
+            //     'created_at' => now(),
+            //     'updated_at' => now(),
+            // ],
         ];
-        DB::table('tags')->insert($tag);
+        Tag::insert($tags);
     }
 }
